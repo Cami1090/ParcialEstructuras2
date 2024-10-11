@@ -31,7 +31,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         this.controlador = controller == null ? new ControladorPrincipal() : controller;
         botones = new JButton[3][5];
         dibujarBotones();
-        pintarBotones();
+//        pintarBotones();
     }
 
 private void dibujarBotones() {
@@ -78,21 +78,29 @@ private void dibujarBotones() {
 
 
 
-    private void pintarBotones() {
-        for (int i = 0; i < botones.length; i++) {
-            for (int j = 0; j < botones[i].length; j++) {
-                Locker locker = controlador.entregarLocker(i, j);
-                if (locker != null && locker.getContraseña() != null) {//Verifica que el auditorio tenga un tema
-                    botones[i][j].setBackground(Color.GREEN);
-                    if (locker.validarOcupado()) {//Verifica que en el auditorio tenga participantes
-                        botones[i][j].setBackground(Color.BLUE);
-                    }
-                } else {
-                    botones[i][j].setBackground(Color.WHITE);
-                }
-            }
-        }
-    }
+//    private void pintarBotones() {
+//
+//        for (int i = 0; i < botones.length; i++) {
+//            for (int j = 0; j < botones[i].length; j++) {
+//                // Verificar si el botón no es null
+//                if (botones[i][j] != null) {
+//                    Locker locker = controlador.entregarLocker(i, j);
+//
+//                    // Cambiar el color del botón basado en el estado del auditorio
+//                    if (locker.esBlanco()) {
+//                        botones[i][j].setBackground(Color.WHITE);
+//                    }
+//
+//                    if (locker.esAzul()) {
+//                        botones[i][j].setBackground(Color.BLUE);
+//                    }
+//
+//                    if (locker.esVerde()) {
+//                    }
+//                }
+//            }
+//        }
+//    }
 
 
 
@@ -103,7 +111,7 @@ private void dibujarBotones() {
                 if (e.getSource().equals(botones[i][j])) {
                     int fila = i;
                     int columna = j;
-                    Locker locker = controlador.entregarAuditio(fila, columna);
+                    Locker locker = controlador.entregarLocker(fila, columna);
                     VentanaLocker va  = new VentanaLocker(this.controlador, locker);
                     va.setVisible(true);
                     this.dispose();
