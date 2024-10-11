@@ -48,5 +48,6 @@ public class ControladorLocker {
         locker.setContraseña(null);
         locker.setId(0);
         locker.setNombre(null);
+        locker.borrarLista();
     }
 }

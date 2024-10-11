@@ -153,13 +153,20 @@ public class VentanaAsignacion extends javax.swing.JFrame {
         String nombre = txtNombre.getText();
         String contrasena = txtConstrasena.getText();
         if(id != 0 && nombre != null && contrasena != null){
-            locker.setId(id);
-            locker.setNombre(nombre);
-            locker.setContraseña(contrasena);
-            JOptionPane.showMessageDialog(null, "Locker asignado");
-            VentanaPrincipal vp = new VentanaPrincipal(controlador);
-            vp.setVisible(true);
-            this.dispose();
+            if(controlador.validarLocker(id)){
+                locker.setId(id);
+                locker.setNombre(nombre);
+                locker.setContraseña(contrasena);
+                JOptionPane.showMessageDialog(null, "Locker asignado");
+                VentanaPrincipal vp = new VentanaPrincipal(controlador);
+                vp.setVisible(true);
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, "La persona ya tiene un locker");
+                VentanaPrincipal vp = new VentanaPrincipal(controlador);
+                vp.setVisible(true);
+                this.dispose();
+            }
         }else{
             JOptionPane.showMessageDialog(null, "complete los campos");
         }

@@ -94,4 +94,8 @@ public class Locker {
         }
         return false;
     }
+    
+    public void borrarLista(){
+        lista = new ListaEnlazada<>();
+    }
 }

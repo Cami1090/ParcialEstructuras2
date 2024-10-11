@@ -34,16 +34,15 @@ public class ControladorPrincipal {
         for (int i = 0; i < lockers.length; i++) {
             for (int j = 0; j < lockers[i].length; j++) {
                 if (lockers[i][j].getId() == id) {
-                    return true;
+                    return false;
                 }
             }
         }
-        return false;
+        return true;
     }
      
      public Locker entregarLocker(int fila, int columna) {
         return lockers[fila][columna];
     }
-    
     
 }

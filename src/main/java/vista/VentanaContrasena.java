@@ -5,6 +5,7 @@
 package vista;
 
 import controlador.ControladorPrincipal;
+import javax.swing.JOptionPane;
 import modelo.Locker;
 
 /**
@@ -131,10 +132,15 @@ public class VentanaContrasena extends javax.swing.JFrame {
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         // TODO add your handling code here:
-        String contrasena = txtContrasena.getText();
-        if(locker.getContraseña().equals(contrasena)){
+        String contrasenia = txtContrasena.getText();
+        if(locker.getContraseña().equals(contrasenia)){
             VentanaLocker vl = new VentanaLocker(controlador, locker);
             vl.setVisible(true);
+            this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(null, "Contraseña incorrecta");
+            VentanaPrincipal vp = new VentanaPrincipal(controlador);
+            vp.setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_btnIngresarActionPerformed
