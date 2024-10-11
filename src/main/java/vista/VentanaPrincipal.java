@@ -78,26 +78,6 @@ private void dibujarBotones() {
 
 
 
-
-//    private void pintarBotones() {
-//        for (int i = 0; i < botones.length; i++) {
-//            for (int j = 0; j < botones[i].length; j++) {
-//                Auditorio auditorio = controlador.entregarAuditio(i, j);
-//                if (auditorio.esBlanco()) {
-//                    botones[i][j].setBackground(Color.WHITE);
-//                }
-//
-//                if (auditorio.esAzul()) {
-//                    botones[i][j].setBackground(Color.BLUE);
-//                }
-//
-//               if (auditorio.esVerde()) {
-//                    botones[i][j].setBackground(Color.GREEN);
-//                }
-//                
-//            }
-//        }
-//    }
     private void pintarBotones() {
     for (int i = 0; i < botones.length; i++) {
         for (int j = 0; j < botones[i].length; j++) {
