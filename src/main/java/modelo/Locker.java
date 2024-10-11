@@ -55,7 +55,7 @@ public class Locker {
         return lista;
     }
 
-    public boolean validarOcupada() {
+    public boolean validarOcupado() {
         return !lista.isEmpty();
     }
     

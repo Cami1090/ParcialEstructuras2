@@ -79,28 +79,21 @@ private void dibujarBotones() {
 
 
     private void pintarBotones() {
-    for (int i = 0; i < botones.length; i++) {
-        for (int j = 0; j < botones[i].length; j++) {
-            // Verificar si el botón no es null
-            if (botones[i][j] != null) {
-                Locker locker = controlador.entregarAuditio(i, j);
-
-                // Cambiar el color del botón basado en el estado del auditorio
-                if (locker.esBlanco()) {
-                    botones[i][j].setBackground(Color.WHITE);
-                }
-
-                if (locker.esAzul()) {
-                    botones[i][j].setBackground(Color.BLUE);
-                }
-
-                if (locker.esVerde()) {
+        for (int i = 0; i < botones.length; i++) {
+            for (int j = 0; j < botones[i].length; j++) {
+                Locker locker = controlador.entregarLocker(i, j);
+                if (locker != null && locker.getContraseña() != null) {//Verifica que el auditorio tenga un tema
                     botones[i][j].setBackground(Color.GREEN);
+                    if (locker.validarOcupado()) {//Verifica que en el auditorio tenga participantes
+                        botones[i][j].setBackground(Color.BLUE);
+                    }
+                } else {
+                    botones[i][j].setBackground(Color.WHITE);
                 }
             }
         }
     }
-}
+
 
 
     @Override
@@ -203,5 +196,6 @@ private void dibujarBotones() {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel panelBotones;
     // End of variables declaration//GEN-END:variables
-
+    
 }
+
