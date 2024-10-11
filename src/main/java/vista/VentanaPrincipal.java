@@ -83,7 +83,7 @@ private void dibujarBotones() {
         for (int j = 0; j < botones[i].length; j++) {
             // Verificar si el botón no es null
             if (botones[i][j] != null) {
-                Locker locker = controlador.entregarAuditio(i, j);
+                Locker locker = controlador.entregarLocker(i, j);
 
                 // Cambiar el color del botón basado en el estado del auditorio
                 if (locker.esBlanco()) {
@@ -110,7 +110,7 @@ private void dibujarBotones() {
                 if (e.getSource().equals(botones[i][j])) {
                     int fila = i;
                     int columna = j;
-                    Locker locker = controlador.entregarAuditio(fila, columna);
+                    Locker locker = controlador.entregarLocker(fila, columna);
                     VentanaLocker va  = new VentanaLocker(this.controlador, locker);
                     va.setVisible(true);
                     this.dispose();
