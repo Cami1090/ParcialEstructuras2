@@ -104,6 +104,7 @@ private void dibujarBotones() {
 
 
 
+
     @Override
     public void actionPerformed(ActionEvent e) {
         for (int i = 0; i < botones.length; i++) {
