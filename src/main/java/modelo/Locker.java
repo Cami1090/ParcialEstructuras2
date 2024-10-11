@@ -4,6 +4,10 @@
  */
 package modelo;
 
+import util.IList;
+import util.ListaEnlazada;
+import modelo.Objeto;
+
 /**
  *
  * @author IVAN
@@ -13,12 +17,14 @@ public class Locker {
     private int id;
     private String nombre;
     private String contraseña;
-//    private Lista lista;
+    private IList<Objeto> lista;
 
     public Locker(int id, String nombre, String contraseña) {
         this.id = id;
         this.nombre = nombre;
         this.contraseña = contraseña;
+        this.lista = new ListaEnlazada<>();
+           
     }
 
     public int getId() {
@@ -45,5 +51,48 @@ public class Locker {
         this.contraseña = contraseña;
     }
     
+    public IList getObjetos() {
+        return lista;
+    }
 
+    public boolean validarOcupada() {
+        return !lista.isEmpty();
+    }
+    
+    public Objeto buscarObjeto(int id) {
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getId() == id) {
+                return lista.get(i);
+            }
+        }
+        return null;
+    }
+    
+    public boolean guardarObjeto(Objeto persona) {
+        Objeto aux = buscarObjeto(persona.getId());
+        if (aux == null) {
+            lista.add(persona);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean editarObjeto(Objeto objeto) {
+        Objeto aux = buscarObjeto(objeto.getId());
+        if (aux != null) {
+            aux.setNombre(objeto.getNombre());
+            aux.setDescripcion(objeto.getDescripcion());
+            return true;
+        }
+        return false;
+    }
+
+    public boolean eliminarObjeto(int id) {
+        Objeto aux = buscarObjeto(id);
+        if (aux != null) {
+            lista.remove(aux);
+            return true;
+        }
+        return false;
+    }
 }
