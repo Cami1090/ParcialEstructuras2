@@ -83,18 +83,18 @@ private void dibujarBotones() {
         for (int j = 0; j < botones[i].length; j++) {
             // Verificar si el botón no es null
             if (botones[i][j] != null) {
-                Locker auditorio = controlador.entregarAuditio(i, j);
+                Locker locker = controlador.entregarAuditio(i, j);
 
                 // Cambiar el color del botón basado en el estado del auditorio
-                if (auditorio.esBlanco()) {
+                if (locker.esBlanco()) {
                     botones[i][j].setBackground(Color.WHITE);
                 }
 
-                if (auditorio.esAzul()) {
+                if (locker.esAzul()) {
                     botones[i][j].setBackground(Color.BLUE);
                 }
 
-                if (auditorio.esVerde()) {
+                if (locker.esVerde()) {
                     botones[i][j].setBackground(Color.GREEN);
                 }
             }
@@ -167,7 +167,7 @@ private void dibujarBotones() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        panelBotones.setBorder(javax.swing.BorderFactory.createTitledBorder("Auditorios"));
+        panelBotones.setBorder(javax.swing.BorderFactory.createTitledBorder("Lockers"));
 
         javax.swing.GroupLayout panelBotonesLayout = new javax.swing.GroupLayout(panelBotones);
         panelBotones.setLayout(panelBotonesLayout);
