@@ -14,10 +14,9 @@ public class Objeto {
     private String nombre;
     private String descripcion;
 
-    public Objeto(int id, String nombre, String descripcion) {
+    public Objeto(int id, String nombre) {
         this.id = id;
         this.nombre = nombre;
-        this.descripcion = descripcion;
     }
 
     public int getId() {
@@ -35,14 +34,4 @@ public class Objeto {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-    
-    
 }

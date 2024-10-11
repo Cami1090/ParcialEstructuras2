@@ -9,6 +9,7 @@ import controlador.ControladorPrincipal;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Locker;
+import modelo.Objeto;
 
 
 /**
@@ -30,7 +31,7 @@ public class VentanaLocker extends javax.swing.JFrame {
         controlador = new ControladorLocker(locker);
 
         
-        llenarTabla();
+//        llenarTabla();
     }
 
     private void limpiarCampos() {
@@ -55,9 +56,8 @@ public class VentanaLocker extends javax.swing.JFrame {
         model.setColumnIdentifiers(new Object[]{"id", "Nombre"});
         for (int i = 0; i < controlador.getObjetos().size(); i++) {
             model.addRow(new Object[]{
-                controlador.getObjetos().get(i).getId(),
-                controlador.getParticipantes().get(i).getNombre(),
-                controlador.getParticipantes().get(i).getEdad()
+                controlador.buscarObjeto(i).getId(),
+                controlador.buscarObjeto(i).getNombre()
             });
         }
         tabla.setModel(model);
@@ -262,81 +262,68 @@ public class VentanaLocker extends javax.swing.JFrame {
 
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
         // TODO add your handling code here:
+        
+        
     }//GEN-LAST:event_txtIdActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-       
-
-            if (validarCampos()) {
-                String nombre = txtNombre.getText();
-                String cedula = txtId.getText();
-                String edad = txtEdad.getText();
-                int edadNumero = Integer.parseInt(edad);
-
-                boolean existe = controladorPrincipal.verificarExistenciaParticipante(cedula);
-                if (existe) {
-                    JOptionPane.showMessageDialog(null, "El participante ya ha sido registrado en un auditorio");
-                    return;
-                }
-
-                Participante persona = new Participante(nombre, edadNumero, cedula);
-                controlador.guardarParticipante(persona);
-                JOptionPane.showMessageDialog(null, "Participante guardado");
-                limpiarCampos();
-                llenarTabla();
-            } else {
-                JOptionPane.showMessageDialog(null, "Ingrese todos los campos");
-            }
-
-       
+        int id = Integer.parseInt(txtId.getText());
+        String nombre = txtNombre.getText();
+        Objeto aux = new Objeto(id, nombre);
+        boolean guardar = controlador.guardarObjeto(aux);
+        if(guardar){
+            JOptionPane.showMessageDialog(null, "El objeto se guardo");
+        }else {
+            JOptionPane.showMessageDialog(null, "No se pudo guardar");
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-
-        try {
-            if (controlador.obtenerTemaExposicion() == null) {
-                JOptionPane.showMessageDialog(null, "Debe ingresar primero un tema de exposicion");
-                return;
-            }
-
-            String cedula = txtId.getText();
-            controlador.eliminarParticipante(cedula);
-            JOptionPane.showMessageDialog(null, "Participante eliminado");
-            limpiarCampos();
-            llenarTabla();
-
-        } catch (RuntimeException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        }
+//
+//        try {
+//            if (controlador.obtenerTemaExposicion() == null) {
+//                JOptionPane.showMessageDialog(null, "Debe ingresar primero un tema de exposicion");
+//                return;
+//            }
+//
+//            String cedula = txtId.getText();
+//            controlador.eliminarParticipante(cedula);
+//            JOptionPane.showMessageDialog(null, "Participante eliminado");
+//            limpiarCampos();
+//            llenarTabla();
+//
+//        } catch (RuntimeException ex) {
+//            JOptionPane.showMessageDialog(null, ex.getMessage());
+//        }
 
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
 
-        try {
-
-           
-
-            if (validarCampos()) {
-                String nombre = txtNombre.getText();
-                String cedula = txtId.getText();
-                String edad = txtEdad.getText();
-                int edadNumero = Integer.parseInt(edad);
-
-                Participante persona = new Participante(nombre, edadNumero, cedula);
-                controlador.editarParticipante(persona);
-                JOptionPane.showMessageDialog(null, "Participante modificado");
-                limpiarCampos();
-                llenarTabla();
-            } else {
-                JOptionPane.showMessageDialog(null, "Ingrese todos los campos");
-            }
-
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "Ingrese una edad valida");
-        } catch (RuntimeException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        }
+//        try {
+//
+//           
+//
+//            if (validarCampos()) {
+//                String nombre = txtNombre.getText();
+//                String cedula = txtId.getText();
+//                String edad = txtEdad.getText();
+//                int edadNumero = Integer.parseInt(edad);
+//
+//                Participante persona = new Participante(nombre, edadNumero, cedula);
+//                controlador.editarParticipante(persona);
+//                JOptionPane.showMessageDialog(null, "Participante modificado");
+//                limpiarCampos();
+//                llenarTabla();
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Ingrese todos los campos");
+//            }
+//
+//        } catch (NumberFormatException ex) {
+//            JOptionPane.showMessageDialog(null, "Ingrese una edad valida");
+//        } catch (RuntimeException ex) {
+//            JOptionPane.showMessageDialog(null, ex.getMessage());
+//        }
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
@@ -347,7 +334,7 @@ public class VentanaLocker extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaActionPerformed
-        llenarTabla();
+//        llenarTabla();
     }//GEN-LAST:event_btnListaActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed

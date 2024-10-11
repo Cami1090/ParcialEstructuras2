@@ -31,78 +31,66 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         this.controlador = controller == null ? new ControladorPrincipal() : controller;
         botones = new JButton[3][5];
         dibujarBotones();
-//        pintarBotones();
+        pintarBotones();
     }
 
-private void dibujarBotones() {
-    int separado = 30; // Espacio entre los botones
-    int ancho = 60;
-    int alto = 40;
-    int texto = 1; // Contador para el texto de los botones
+    private void dibujarBotones() {
+        int separado = 30; // Espacio entre los botones
+        int ancho = 60;
+        int alto = 40;
+        int texto = 1; // Contador para el texto de los botones
 
-    for (int i = 0; i < botones.length; i++) {
-        for (int j = 0; j < botones[i].length; j++) {
-            // Si es la posición central (fila 1, columna 2), no se crea el botón
-            if (!(i == 1 && j == 2)) {
-                JButton boton = new JButton();
+        for (int i = 0; i < botones.length; i++) {
+            for (int j = 0; j < botones[i].length; j++) {
+                // Si es la posición central (fila 1, columna 2), no se crea el botón
+                if (!(i == 1 && j == 2)) {
+                    JButton boton = new JButton();
 
-                boton.setBounds(
-                    ancho * j + separado,
-                    alto * i + separado,
-                    ancho,
-                    alto);
-                
-                boton.setText(String.valueOf(texto));
-                boton.addActionListener(this);
+                    boton.setBounds(
+                        ancho * j + separado,
+                        alto * i + separado,
+                        ancho,
+                        alto);
 
-                botones[i][j] = boton;
-                panelBotones.add(botones[i][j]);
+                    boton.setText(String.valueOf(texto));
+                    boton.addActionListener(this);
 
-                // Incrementar el texto para el siguiente botón
-                texto++; 
+                    botones[i][j] = boton;
+                    panelBotones.add(botones[i][j]);
 
-                // Cuando llegues al botón 5, salta a 11
-                if (texto == 6) {
-                    texto = 11;
-                }
-                
-                // Cuando llegues al botón 14, salta a 21
-                if (texto == 15) {
-                    texto = 21;
+                    // Incrementar el texto para el siguiente botón
+                    texto++; 
+
+                    // Cuando llegues al botón 5, salta a 11
+                    if (texto == 6) {
+                        texto = 11;
+                    }
+
+                    // Cuando llegues al botón 14, salta a 21
+                    if (texto == 15) {
+                        texto = 21;
+                    }
                 }
             }
         }
     }
-}
 
 
-
-
-//    private void pintarBotones() {
-//
-//        for (int i = 0; i < botones.length; i++) {
-//            for (int j = 0; j < botones[i].length; j++) {
-//                // Verificar si el botón no es null
-//                if (botones[i][j] != null) {
-//                    Locker locker = controlador.entregarLocker(i, j);
-//
-//                    // Cambiar el color del botón basado en el estado del auditorio
-//                    if (locker.esBlanco()) {
-//                        botones[i][j].setBackground(Color.WHITE);
-//                    }
-//
-//                    if (locker.esAzul()) {
-//                        botones[i][j].setBackground(Color.BLUE);
-//                    }
-//
-//                    if (locker.esVerde()) {
-//                    }
-//                }
-//            }
-//        }
-//    }
-
-
+    private void pintarBotones() {
+        for (int i = 0; i < botones.length; i++) {
+            for (int j = 0; j < botones[i].length; j++) {
+                Locker locker  = controlador.entregarLocker(i, j);
+                if (locker != null && locker.getId()!= 0 && locker.getNombre() != null && locker.getContraseña() != null) {//Verifica que el locker este asignado
+                    botones[i][j].setBackground(Color.BLUE);
+                    if (locker.validarOcupado()) {//Verifica que en el locker este ocupado
+                        botones[i][j].setBackground(Color.GREEN);
+                    }
+                } else {
+                    botones[i][j].setBackground(Color.WHITE);
+                }
+            }
+        }
+    }
 
 
     @Override
@@ -113,9 +101,15 @@ private void dibujarBotones() {
                     int fila = i;
                     int columna = j;
                     Locker locker = controlador.entregarLocker(fila, columna);
-                    VentanaLocker va  = new VentanaLocker(this.controlador, locker);
-                    va.setVisible(true);
-                    this.dispose();
+                    if(locker.getContraseña() == null){
+                        VentanaAsignacion va = new VentanaAsignacion(locker);
+                        va.setVisible(true);
+                        this.dispose();
+                    }else{
+                        VentanaContrasena vc  = new VentanaContrasena(this.controlador, locker);
+                        vc.setVisible(true);
+                        this.dispose();
+                    }
                 }
             }
         }

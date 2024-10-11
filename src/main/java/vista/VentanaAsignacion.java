@@ -4,17 +4,28 @@
  */
 package vista;
 
+import javax.swing.JOptionPane;
+import modelo.Locker;
+
 /**
  *
  * @author Cami
  */
 public class VentanaAsignacion extends javax.swing.JFrame {
 
+    private Locker locker;
     /**
      * Creates new form VentanaAsignacion
      */
     public VentanaAsignacion() {
         initComponents();
+        setLocationRelativeTo(this);
+    }
+    
+    public VentanaAsignacion(Locker locker){
+        initComponents();
+        setLocationRelativeTo(this);
+        this.locker = locker;
     }
 
     /**
@@ -135,7 +146,16 @@ public class VentanaAsignacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-       
+       int id = Integer.parseInt(txtId.getText());
+       String nombre = txtNombre.getText();
+       String contrasena = txtConstrasena.getText();
+       if(id != 0 && nombre != null && contrasena != null){
+           locker.setId(id);
+           locker.setNombre(nombre);
+           locker.setContraseña(contrasena);
+       }else{
+           JOptionPane.showMessageDialog(null, "complete los campos");
+       }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
