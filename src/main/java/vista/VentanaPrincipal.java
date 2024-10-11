@@ -86,19 +86,19 @@ private void dibujarBotones() {
                 Locker locker = controlador.entregarLocker(i, j);
 
                 // Cambiar el color del botón basado en el estado del auditorio
-                if (locker.esBlanco()) {
-                    botones[i][j].setBackground(Color.WHITE);
-                }
-
-                if (locker.esAzul()) {
-                    botones[i][j].setBackground(Color.BLUE);
-                }
-
-                if (locker.esVerde()) {
-                    botones[i][j].setBackground(Color.GREEN);
-                }
-            }
-        }
+//                if (locker.esBlanco()) {
+//                    botones[i][j].setBackground(Color.WHITE);
+//                }
+//
+//                if (locker.esAzul()) {
+//                    botones[i][j].setBackground(Color.BLUE);
+//                }
+//
+//                if (locker.esVerde()) {
+//                    botones[i][j].setBackground(Color.GREEN);
+//                }
+          }
+       }
     }
 }
 

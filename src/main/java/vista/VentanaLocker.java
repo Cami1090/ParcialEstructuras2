@@ -13,7 +13,7 @@ import modelo.Locker;
 
 /**
  *
- * @author Valentina
+ * @author Cami
  */
 public class VentanaLocker extends javax.swing.JFrame {
 
@@ -25,7 +25,7 @@ public class VentanaLocker extends javax.swing.JFrame {
      */
     public VentanaLocker(ControladorPrincipal controladorPrincipal, Locker locker) {
         initComponents();
-        setTitle("Ventana locker");
+        setTitle("Ventana Gestion locker");
         this.controladorPrincipal = controladorPrincipal;
         controlador = new ControladorLocker(locker);
 
@@ -34,17 +34,17 @@ public class VentanaLocker extends javax.swing.JFrame {
     }
 
     private void limpiarCampos() {
-        txtEdad.setText("");
-        txtCedula.setText("");
+       
+        txtId.setText("");
         txtNombre.setText("");
     }
 
     private boolean validarCampos() {
         String nombre = txtNombre.getText();
-        String cedula = txtCedula.getText();
-        String edad = txtEdad.getText();
+        String id = txtId.getText();
+       
 
-        if (nombre.equals("") || cedula.equals("") || edad.equals("")) {
+        if (nombre.equals("") || id.equals("")) {
             return false;
         }
         return true;
@@ -52,10 +52,10 @@ public class VentanaLocker extends javax.swing.JFrame {
 
     private void llenarTabla() {
         DefaultTableModel model = new DefaultTableModel();
-        model.setColumnIdentifiers(new Object[]{"Cedula", "Nombre", "Edad"});
-        for (int i = 0; i < controlador.getParticipantes().size(); i++) {
+        model.setColumnIdentifiers(new Object[]{"id", "Nombre"});
+        for (int i = 0; i < controlador.getObjetos().size(); i++) {
             model.addRow(new Object[]{
-                controlador.getParticipantes().get(i).getCedula(),
+                controlador.getObjetos().get(i).getId(),
                 controlador.getParticipantes().get(i).getNombre(),
                 controlador.getParticipantes().get(i).getEdad()
             });
@@ -73,40 +73,40 @@ public class VentanaLocker extends javax.swing.JFrame {
     private void initComponents() {
 
         panelDatosParticipantes = new javax.swing.JPanel();
-        txtCedula = new javax.swing.JTextField();
-        btnCrear = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
+        txtId = new javax.swing.JTextField();
+        btnGuardar = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
-        btnEliminar1 = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         txtNombre = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
-        btnRegresar = new javax.swing.JButton();
-        btnLista = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
+        btnRegresar = new javax.swing.JButton();
+        btnLista = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         panelDatosParticipantes.setBorder(javax.swing.BorderFactory.createTitledBorder("Gestion de elementos:"));
 
-        txtCedula.setBorder(javax.swing.BorderFactory.createTitledBorder("Id: "));
-        txtCedula.addActionListener(new java.awt.event.ActionListener() {
+        txtId.setBorder(javax.swing.BorderFactory.createTitledBorder("Id: "));
+        txtId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCedulaActionPerformed(evt);
+                txtIdActionPerformed(evt);
             }
         });
 
-        btnCrear.setText("CREAR");
-        btnCrear.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setText("CREAR");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCrearActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
 
-        btnEliminar.setText("BUSCAR");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscar.setText("BUSCAR");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
+                btnBuscarActionPerformed(evt);
             }
         });
 
@@ -117,10 +117,10 @@ public class VentanaLocker extends javax.swing.JFrame {
             }
         });
 
-        btnEliminar1.setText("ELIMINAR");
-        btnEliminar1.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminar.setText("ELIMINAR");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminar1ActionPerformed(evt);
+                btnEliminarActionPerformed(evt);
             }
         });
 
@@ -142,49 +142,67 @@ public class VentanaLocker extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(panelDatosParticipantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(panelDatosParticipantesLayout.createSequentialGroup()
-                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(46, 46, 46)
                                 .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panelDatosParticipantesLayout.createSequentialGroup()
-                                .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(44, 44, 44)
-                                .addComponent(btnEliminar1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(19, 19, 19))
                     .addGroup(panelDatosParticipantesLayout.createSequentialGroup()
                         .addGroup(panelDatosParticipantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
-                            .addComponent(txtCedula))
+                            .addComponent(txtId))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         panelDatosParticipantesLayout.setVerticalGroup(
             panelDatosParticipantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelDatosParticipantesLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(84, 84, 84)
                 .addGroup(panelDatosParticipantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminar1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14)
                 .addGroup(panelDatosParticipantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Participantes"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Elementos"));
+
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tabla);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 355, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 433, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(0, 6, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         btnRegresar.setText("Regresar");
@@ -201,19 +219,6 @@ public class VentanaLocker extends javax.swing.JFrame {
             }
         });
 
-        tabla.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(tabla);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -221,9 +226,7 @@ public class VentanaLocker extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(panelDatosParticipantes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnLista, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -237,22 +240,18 @@ public class VentanaLocker extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(31, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(panelDatosParticipantes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelDatosParticipantes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLista, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42))
         );
+
+        jPanel3.getAccessibleContext().setAccessibleName("Elementos");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -261,21 +260,16 @@ public class VentanaLocker extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
 
-    private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed
+    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCedulaActionPerformed
+    }//GEN-LAST:event_txtIdActionPerformed
 
-    private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
-        try {
-
-            if (controlador.obtenerTemaExposicion() == null) {
-                JOptionPane.showMessageDialog(null, "Debe ingresar primero un tema de exposicion");
-                return;
-            }
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+       
 
             if (validarCampos()) {
                 String nombre = txtNombre.getText();
-                String cedula = txtCedula.getText();
+                String cedula = txtId.getText();
                 String edad = txtEdad.getText();
                 int edadNumero = Integer.parseInt(edad);
 
@@ -294,14 +288,10 @@ public class VentanaLocker extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Ingrese todos los campos");
             }
 
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "Ingrese una edad valida");
-        } catch (RuntimeException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        }
-    }//GEN-LAST:event_btnCrearActionPerformed
+       
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
 
         try {
             if (controlador.obtenerTemaExposicion() == null) {
@@ -309,7 +299,7 @@ public class VentanaLocker extends javax.swing.JFrame {
                 return;
             }
 
-            String cedula = txtCedula.getText();
+            String cedula = txtId.getText();
             controlador.eliminarParticipante(cedula);
             JOptionPane.showMessageDialog(null, "Participante eliminado");
             limpiarCampos();
@@ -319,20 +309,17 @@ public class VentanaLocker extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
-    }//GEN-LAST:event_btnEliminarActionPerformed
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
 
         try {
 
-            if (controlador.obtenerTemaExposicion() == null) {
-                JOptionPane.showMessageDialog(null, "Debe ingresar primero un tema de exposicion");
-                return;
-            }
+           
 
             if (validarCampos()) {
                 String nombre = txtNombre.getText();
-                String cedula = txtCedula.getText();
+                String cedula = txtId.getText();
                 String edad = txtEdad.getText();
                 int edadNumero = Integer.parseInt(edad);
 
@@ -363,14 +350,14 @@ public class VentanaLocker extends javax.swing.JFrame {
         llenarTabla();
     }//GEN-LAST:event_btnListaActionPerformed
 
-    private void btnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar1ActionPerformed
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminar1ActionPerformed
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCrear;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnEliminar1;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLista;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnRegresar;
@@ -378,7 +365,7 @@ public class VentanaLocker extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelDatosParticipantes;
     private javax.swing.JTable tabla;
-    private javax.swing.JTextField txtCedula;
+    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }
