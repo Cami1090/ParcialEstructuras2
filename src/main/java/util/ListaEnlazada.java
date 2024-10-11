@@ -24,6 +24,10 @@ public class ListaEnlazada<S> implements IList<S> {
         return this.size;
     }
     
+    public boolean isEmpty(){
+        return this.primero == null;
+    }
+    
     public void add(S dato) {
         Nodo<S> nuevo = new Nodo(dato);
         if(primero == null){
@@ -120,8 +124,4 @@ public class ListaEnlazada<S> implements IList<S> {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
-    public boolean isEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }

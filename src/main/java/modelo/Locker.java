@@ -81,7 +81,6 @@ public class Locker {
         Objeto aux = buscarObjeto(objeto.getId());
         if (aux != null) {
             aux.setNombre(objeto.getNombre());
-            aux.setDescripcion(objeto.getDescripcion());
             return true;
         }
         return false;

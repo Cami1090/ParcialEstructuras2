@@ -4,6 +4,7 @@
  */
 package vista;
 
+import controlador.ControladorPrincipal;
 import javax.swing.JOptionPane;
 import modelo.Locker;
 
@@ -14,6 +15,7 @@ import modelo.Locker;
 public class VentanaAsignacion extends javax.swing.JFrame {
 
     private Locker locker;
+    private ControladorPrincipal controlador;
     /**
      * Creates new form VentanaAsignacion
      */
@@ -22,9 +24,10 @@ public class VentanaAsignacion extends javax.swing.JFrame {
         setLocationRelativeTo(this);
     }
     
-    public VentanaAsignacion(Locker locker){
+    public VentanaAsignacion(ControladorPrincipal controlador, Locker locker){
         initComponents();
         setLocationRelativeTo(this);
+        this.controlador = controlador;
         this.locker = locker;
     }
 
@@ -146,20 +149,26 @@ public class VentanaAsignacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-       int id = Integer.parseInt(txtId.getText());
-       String nombre = txtNombre.getText();
-       String contrasena = txtConstrasena.getText();
-       if(id != 0 && nombre != null && contrasena != null){
-           locker.setId(id);
-           locker.setNombre(nombre);
-           locker.setContraseña(contrasena);
-       }else{
-           JOptionPane.showMessageDialog(null, "complete los campos");
-       }
+        int id = Integer.parseInt(txtId.getText());
+        String nombre = txtNombre.getText();
+        String contrasena = txtConstrasena.getText();
+        if(id != 0 && nombre != null && contrasena != null){
+            locker.setId(id);
+            locker.setNombre(nombre);
+            locker.setContraseña(contrasena);
+            JOptionPane.showMessageDialog(null, "Locker asignado");
+            VentanaPrincipal vp = new VentanaPrincipal(controlador);
+            vp.setVisible(true);
+            this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(null, "complete los campos");
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-
+        VentanaPrincipal vp = new VentanaPrincipal(controlador);
+        vp.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
