@@ -20,14 +20,14 @@ public class ControladorLocker {
         this.locker = locker;
     }
     
-    public IList getObjetos() {
+    public IList<Objeto> getObjetos() {
         return locker.getObjetos();
     }
     
     public boolean guardarObjeto (Objeto objeto) throws RuntimeException {
         Objeto aux = buscarObjeto(objeto.getId());
         if(aux == null){
-            return locker.guardarObjeto(aux);
+            return locker.guardarObjeto(objeto);
         }
         return false;
     }

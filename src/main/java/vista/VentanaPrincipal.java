@@ -33,46 +33,10 @@ public class VentanaPrincipal extends javax.swing.JFrame implements ActionListen
         dibujarBotones();
         pintarBotones();
     }
-
-//    private void dibujarBotones() {
-//        int separado = 30; // Espacio entre los botones
-//        int ancho = 60;
-//        int alto = 40;
-//        int texto = 1; // Contador para el texto de los botones
-//
-//        for (int i = 0; i < botones.length; i++) {
-//            for (int j = 0; j < botones[i].length; j++) {
-//                // Si es la posición central (fila 1, columna 2), no se crea el botón
-//                if (!(i == 1 && j == 2)) {
-//                    botones[i][j] = new JButton();
-//
-//                    botones[i][j].setBounds(
-//                        ancho * j + separado,
-//                        alto * i + separado,
-//                        ancho,
-//                        alto);
-//
-//                    botones[i][j].setText(String.valueOf(texto));
-//                    botones[i][j].addActionListener(this);
-//
-//                    panelBotones.add(botones[i][j]);
-//
-//                    // Incrementar el texto para el siguiente botón
-//                    texto++; 
-//
-//                    // Cuando llegues al botón 5, salta a 11
-//                    if (texto == 6) {
-//                        texto = 11;
-//                    }
-//
-//                    // Cuando llegues al botón 14, salta a 21
-//                    if (texto == 15) {
-//                        texto = 21;
-//                    }
-//                }
-//            }
-//        }
-//    }
+    
+    
+    
+  
     
     private void dibujarBotones() {
         int separado = 20;

@@ -51,7 +51,7 @@ public class Locker {
         this.contraseña = contraseña;
     }
     
-    public IList getObjetos() {
+    public IList<Objeto> getObjetos() {
         return lista;
     }
 
@@ -68,6 +68,8 @@ public class Locker {
         return null;
     }
     
+  
+
     public boolean guardarObjeto(Objeto persona) {
         Objeto aux = buscarObjeto(persona.getId());
         if (aux == null) {
