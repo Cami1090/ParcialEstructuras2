@@ -55,21 +55,21 @@ public class VentanaLocker extends javax.swing.JFrame {
 
    private void llenarTabla() {
     DefaultTableModel model = new DefaultTableModel();
-    model.setColumnIdentifiers(new Object[]{"ID", "Nombre"}); // Asegúrate de que las columnas estén definidas
+    model.setColumnIdentifiers(new Object[]{"ID", "Nombre"});
     
-    IList<Objeto> objetos = controlador.getObjetos(); // Obtén la lista de objetos del controlador
-    System.out.println("Objetos en el locker: " + objetos.size());  // Depuración para verificar el tamaño
+    IList<Objeto> objetos = controlador.getObjetos(); 
+    System.out.println("Objetos en el locker: " + objetos.size()); 
 
     for (int i = 0; i < objetos.size(); i++) {
-        Objeto objeto = objetos.get(i); // Obtén cada objeto de la lista
-        System.out.println("Objeto: " + objeto.getId() + " - " + objeto.getNombre());  // Depuración
+        Objeto objeto = objetos.get(i); 
+        
         model.addRow(new Object[]{
             objeto.getId(),
             objeto.getNombre()
         });
     }
 
-    tabla.setModel(model); // Establece el modelo en la tabla
+    tabla.setModel(model);
 }
 
 
@@ -301,12 +301,11 @@ public class VentanaLocker extends javax.swing.JFrame {
   try {
         if (!txtId.getText().isEmpty()) {
             int id = Integer.parseInt(txtId.getText());
-            
-            // Buscar el objeto usando el controlador
+           
             Objeto objeto = controlador.buscarObjeto(id);
             
             if (objeto != null) {
-                // Si se encuentra, mostrar los datos en los campos de texto
+             
                 txtNombre.setText(objeto.getNombre());
                 JOptionPane.showMessageDialog(null, "Objeto encontrado");
             } else {
@@ -318,7 +317,7 @@ public class VentanaLocker extends javax.swing.JFrame {
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(null, "ID debe ser un número válido");
     } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, "Error al buscar: " + e.getMessage());
+        JOptionPane.showMessageDialog(null, "Error al buscar: ");
     }
 
     }//GEN-LAST:event_btnBuscarActionPerformed
@@ -329,22 +328,14 @@ public class VentanaLocker extends javax.swing.JFrame {
         if (!txtId.getText().isEmpty()) {
             int id = Integer.parseInt(txtId.getText());
 
-            // Buscar el objeto actual
+        
             Objeto objeto = controlador.buscarObjeto(id);
             
             if (objeto != null) {
-                // Obtener el nombre modificado u otros datos si es necesario
                 String nuevoNombre = txtNombre.getText();
-                
-                // Actualizamos el objeto con el nuevo nombre
                 objeto.setNombre(nuevoNombre);
-                
-                // Llamamos al método modificar del controlador con el objeto actualizado
                 controlador.editarObjeto(objeto);
-                
                 JOptionPane.showMessageDialog(null, "Objeto modificado correctamente");
-
-                // Actualizar la tabla después de la modificación
                 llenarTabla();  
             } else {
                 JOptionPane.showMessageDialog(null, "El objeto con ID " + id + " no existe.");
@@ -355,7 +346,7 @@ public class VentanaLocker extends javax.swing.JFrame {
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(null, "ID debe ser un número válido");
     } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, "Error al modificar: " + e.getMessage());
+        JOptionPane.showMessageDialog(null, "Error al modificar: ");
     }
     }//GEN-LAST:event_btnModificarActionPerformed
 
@@ -386,14 +377,8 @@ public class VentanaLocker extends javax.swing.JFrame {
  try {
         if (!txtId.getText().isEmpty()) {
             int id = Integer.parseInt(txtId.getText());
-
-            // Llamada al método eliminar del controlador sin retorno
             controlador.eliminarObjeto(id);
-
-            // Suponemos que si no lanza una excepción, se eliminó con éxito
             JOptionPane.showMessageDialog(null, "Objeto eliminado correctamente");
-
-            // Actualizar la tabla después de la eliminación
             llenarTabla();  
         } else {
             JOptionPane.showMessageDialog(null, "Por favor, ingresa un ID válido");
@@ -402,8 +387,7 @@ public class VentanaLocker extends javax.swing.JFrame {
         // Manejo de error si el ID no es un número
         JOptionPane.showMessageDialog(null, "ID debe ser un número entero válido");
     } catch (Exception e) {
-        // Manejo de errores generales
-        JOptionPane.showMessageDialog(null, "Error al eliminar: " + e.getMessage());
+        JOptionPane.showMessageDialog(null, "Error al eliminar: ");
     }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
