@@ -4,7 +4,7 @@
  */
 package controlador;
 
-import java.util.ArrayList;//No se nos puede olvidar eliminar
+import util.IList;
 import modelo.Locker;
 import modelo.Objeto;
 
@@ -20,35 +20,33 @@ public class ControladorLocker {
         this.locker = locker;
     }
     
-    public Lista getPersonas() {
-        return auditorio.getParticipantes();
+    public IList getObjetos() {
+        return locker.getObjetos();
     }
     
-    public boolean guardarPersona (Objeto persona) throws RuntimeException {
-        Objeto aux = buscarPersona(persona.getId());
+    public boolean guardarObjeto (Objeto objeto) throws RuntimeException {
+        Objeto aux = buscarObjeto(objeto.getId());
         if(aux == null){
-            return auditorio.guardarPersona(persona);
+            return locker.guardarObjeto(aux);
         }
         return false;
     }
     
-    public Objeto buscarPersona(int id) {
-        return auditorio.buscarPersona(id);
+    public Objeto buscarObjeto(int id) {
+        return locker.buscarObjeto(id);
     }
     
-    public void editarPersona(Objeto persona) throws RuntimeException {
-        auditorio.editarPersona(persona);
+    public void editarObjeto(Objeto objeto) throws RuntimeException {
+        locker.editarObjeto(objeto);
     }
     
-    public void eliminarPersona(int id) throws RuntimeException {
-        auditorio.eliminarPersona(id);
+    public void eliminarObjeto(int id) throws RuntimeException {
+        locker.eliminarObjeto(id);
     }
     
-    public void borrarLista() {
-        auditorio.borrarLista();
-    }
-    
-    public void eliminarTema(){
-        auditorio.setTema(null);
+    public void desocupar(){
+        locker.setContraseña(null);
+        locker.setId(0);
+        locker.setNombre(null);
     }
 }
